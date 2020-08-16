@@ -1,4 +1,6 @@
-# TheFrenchGhosty's YouTube-DL Archivist Scripts
+# TheHabeshaGhosty's YouTube-DL Archivist Scripts
+
+Python Implementaion of TheFrenchGhosty’s YouTube-DL Archivist Scripts
 
 Associated Reddit /r/Datahoarder post: [Here for 1.0.0](https://redd.it/dwhvq6) and [Here for 2.0.0](https://redd.it/h7q4nz).
 
