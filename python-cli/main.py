@@ -57,7 +57,7 @@ def download(download_mode, link):
         with open(config['links'][download_mode], 'r') as f:
             link = [x.strip() for x in f.readlines()]
     else:
-        link = [].append(link)
+        link = [link]
 
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download(link)
@@ -65,18 +65,24 @@ def download(download_mode, link):
 
 @cli.command()
 @common_options
-@click.option('-f', type=click.Path())
-def add(download_mode, link, f):
+@click.option('-f', 'file', type=click.Path())
+def add(download_mode, link, file):
 
-    if not download_mode or (not link and not f):
+    if not download_mode or (not link and not file):
         print("Exiting")
         exit()
 
     with open('config.json', 'r') as f:
         config = json.load(f)
 
+    if file:
+        with open(file, 'r') as f:
+            link = [l for l in f.readlines()]
+    else:
+        link = [l for l in link.split()]
+
     with open(config['links'][download_mode], 'a') as fi:
-        [fi.write(l) for l in link.split()]
+        [fi.write(l) for l in link]
 
 
 cli()
