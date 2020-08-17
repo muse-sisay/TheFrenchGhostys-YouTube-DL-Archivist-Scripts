@@ -9,7 +9,7 @@ def common_options(f):
     options = [
         click.option(
             '-download-mode', '-m', type=click.Choice(['video', 'channel', 'playlist'], case_sensitive=False, )),
-        click.option('--link', '-l', type=str),
+        click.option('--link', '-l', type=str, help="YouTube link/s"),
     ]
     return functools.reduce(lambda x, opt: opt(x), options, f)
 
@@ -18,15 +18,23 @@ def common_options(f):
 @common_options
 def cli(**kwargs):
     '''
-    SHOW HELP MESSAGE
-    END // WRITE SOMETHING
+    TheHabeshaGhosty-s-YouTube-DL-Archivist-Scripts
+
+    \b
+    Python implementation of TheFrenchGhostys-YouTube-DL-Archivist-Scripts, 
+    The ultimate collection of scripts for YouTube-DL.
     '''
     pass
 
 
-@cli.command()
+@cli.command(short_help='Download vidoes.')
 @common_options
 def download(download_mode, link):
+    '''
+    Download videos
+
+    Downloads videos from text file specified in config.json depending on the mode passed.
+    '''
 
     if not download_mode:
         print("Exiting")
@@ -63,10 +71,15 @@ def download(download_mode, link):
         ydl.download(link)
 
 
-@cli.command()
+@cli.command(short_help='Add links')
 @common_options
-@click.option('-f', 'file', type=click.Path())
+@click.option('-f', 'file', type=click.Path(), help="file to read links from")
 def add(download_mode, link, file):
+    '''
+    Add links
+
+    Add links specfied in config.json depending on the mode "-m" specfied from STDIN or file -f.
+    '''
 
     if not download_mode or (not link and not file):
         print("Exiting")
