@@ -61,4 +61,9 @@ $ python3 main.py add --mode channel -f [FILE]
 (Video Scripts) `--output "%(uploader)s - [%(channel_id)s]/%(title)s - %(uploader)s - %(upload_date)s/%(title)s - %(uploader)s - %(upload_date)s [%(id)s].%(ext)s"` : Tell youtube-dl to download the videos in folders and subfolders, using the naming scheme `Uploader [CHANNELID]/Title - Uploader - 20191231/Title - Uploader - 20191231 [VIDEOID].ext`.
 
 
+# THINGS TO DO
+[ ] Remove links after it finishes from queue
+[ ] Package it (pip)
+[ ] Write metadata that can be used by PLEX
 
+- How does greg store podcast info, sync data. Where does it store it?
