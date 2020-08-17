@@ -48,7 +48,7 @@ def download(download_mode, link):
 
     # Template for output names.
     outtmpl = config['config']['output_format'][download_mode]
-    ydl_opts['outtmpl'] = f"config['output_path']/" + outtmpl
+    ydl_opts['outtmpl'] = f"{config['output_path']}/" + outtmpl
 
     # File name of a file where all downloads are recorded.
     ydl_opts['download_archive'] = config['archive_log'][download_mode]
