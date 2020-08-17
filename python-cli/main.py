@@ -8,7 +8,7 @@ import functools
 def common_options(f):
     options = [
         click.option(
-            '--download-mode', '-m', type=click.Choice(['video', 'channel', 'playlist'], case_sensitive=False, )),
+            '--mode', '-m', type=click.Choice(['video', 'channel', 'playlist'], case_sensitive=False, )),
         click.option('--link', '-l', type=str, help="YouTube link/s"),
     ]
     return functools.reduce(lambda x, opt: opt(x), options, f)
@@ -29,14 +29,14 @@ def cli(**kwargs):
 
 @cli.command(short_help='Download vidoes.')
 @common_options
-def download(download_mode, link):
+def download(mode, link):
     '''
     Download videos
 
     Downloads videos from text file specified in config.json depending on the mode passed.
     '''
 
-    if not download_mode:
+    if not mode:
         print("Exiting")
         exit()
 
@@ -50,19 +50,19 @@ def download(download_mode, link):
     ydl_opts = {"format": f_ormat}
     ydl_opts.update(extra)
 
-    if download_mode == 'unique':
+    if mode == 'unique':
         # If the video is part of a playlist download only the video
         ydl_opts['noplaylist'] = True
 
     # Template for output names.
-    outtmpl = config['config']['output_format'][download_mode]
+    outtmpl = config['config']['output_format'][mode]
     ydl_opts['outtmpl'] = f"{config['output_path']}/" + outtmpl
 
     # File name of a file where all downloads are recorded.
-    ydl_opts['download_archive'] = config['archive_log'][download_mode]
+    ydl_opts['download_archive'] = config['archive_log'][mode]
 
     if not link:
-        with open(config['links'][download_mode], 'r') as f:
+        with open(config['links'][mode], 'r') as f:
             link = [x.strip() for x in f.readlines()]
     else:
         link = [link]
@@ -74,14 +74,14 @@ def download(download_mode, link):
 @cli.command(short_help='Add links')
 @common_options
 @click.option('-f', 'file', type=click.Path(), help="file to read links from")
-def add(download_mode, link, file):
+def add(mode, link, file):
     '''
     Add links
 
     Add links specfied in config.json depending on the mode "-m" specfied from STDIN or file -f.
     '''
 
-    if not download_mode or (not link and not file):
+    if not mode or (not link and not file):
         print("Exiting")
         exit()
 
@@ -94,7 +94,7 @@ def add(download_mode, link, file):
     else:
         link = [l for l in link.split()]
 
-    with open(config['links'][download_mode], 'a') as fi:
+    with open(config['links'][mode], 'a') as fi:
         [fi.write(l) for l in link]
 
 
