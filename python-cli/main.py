@@ -8,7 +8,7 @@ import functools
 def common_options(f):
     options = [
         click.option(
-            '-download-mode', '-m', type=click.Choice(['video', 'channel', 'playlist'], case_sensitive=False, )),
+            '--download-mode', '-m', type=click.Choice(['video', 'channel', 'playlist'], case_sensitive=False, )),
         click.option('--link', '-l', type=str, help="YouTube link/s"),
     ]
     return functools.reduce(lambda x, opt: opt(x), options, f)
