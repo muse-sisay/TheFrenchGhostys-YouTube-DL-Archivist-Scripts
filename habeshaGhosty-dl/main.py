@@ -62,7 +62,7 @@ def download(mode, link):
     ydl_opts['download_archive'] = config['archive_log'][mode]
 
     if not link:
-        with open(config['links'][mode], 'r') as f:
+        with open(config['queue_file'][mode], 'r') as f:
             link = [x.strip() for x in f.readlines()]
     else:
         link = [link]
@@ -94,7 +94,7 @@ def add(mode, link, file):
     else:
         link = [l for l in link.split()]
 
-    with open(config['links'][mode], 'a') as fi:
+    with open(config['queue_file'][mode], 'a') as fi:
         [fi.write(l) for l in link]
 
 
