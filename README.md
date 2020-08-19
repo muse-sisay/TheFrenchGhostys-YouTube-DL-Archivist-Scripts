@@ -1,9 +1,9 @@
 # TheHabeshaGhosty's YouTube-DL Archivist Scripts
-
 Python Implementaion of [TheFrenchGhosty’s YouTube-DL Archivist Scripts](https://github.com/TheFrenchGhosty/TheFrenchGhostys-YouTube-DL-Archivist-Scripts).
 
-Required modules **click** and **youtube-dl**.
+**simple and customizable**
 
+Required modules **click** and **youtube-dl**.
 
 
 **NOTE :** Modify `config.json` before using.
@@ -18,7 +18,7 @@ Required modules **click** and **youtube-dl**.
 		"playlist": "/path/log-playlist",
 		"video": "/path/log-video"
 	},
-	"links": {
+	"queue_file": {
 		"channel": "/path/queue/list-channel",
 		"playlist": "/path/queue/list-playlist",
 		"video": "/path/queue/list-video"
@@ -52,18 +52,72 @@ $ python3 main.py add --mode channel -f [FILE]
 ```
 
 
-# Details :
+## Customization
+### Custom quality
+To use a custom quality, add your quality to config.json under `config -> quality` and change `default_quality`.
+eg.
+```JSON
+  {
+	"config": {
+		"quality": {
+			    ...
+			    "custom_quality" : "value"
+			    ...
+	"default_quality" : "custom_quality",
+	...
+```
 
-(Channels Scripts) `--output "%(uploader)s - [%(channel_id)s]/%(title)s - %(uploader)s - %(upload_date)s/%(title)s - %(uploader)s - %(upload_date)s [%(id)s].%(ext)s"` : Tell youtube-dl to download the videos in folders and subfolders, using the naming scheme `Uploader [CHANNELID]/Title - Uploader - 20191231/Title - Uploader - 20191231 [VIDEOID].ext`.
+### You don't like how the script saves the file(filename)?
+Modify `config -> output_format`. The default output for
 
-(Playlists Scripts) `--output "%(uploader)s - [%(channel_id)s]/%(playlist)s - %(uploader)s - [%(playlist_id)s]/%(title)s - %(uploader)s - %(upload_date)s/%(title)s - %(uploader)s - %(upload_date)s [%(id)s].%(ext)s"` : Tell youtube-dl to download the videos in folders and subfolders, using the naming scheme `Uploader [CHANNELID]/PlaylistName - Uploader [PLAYLISTID]/Title - Uploader 20191231 /Title - Uploader - 20191231 [VIDEOID].ext`.
+- **videos** is
+	
+```
+Uploader [CHANNELID]/Title - Uploader - 20111306/Title - Uploader - 20111306 [VIDEOID].ext
+``` 
 
-(Video Scripts) `--output "%(uploader)s - [%(channel_id)s]/%(title)s - %(uploader)s - %(upload_date)s/%(title)s - %(uploader)s - %(upload_date)s [%(id)s].%(ext)s"` : Tell youtube-dl to download the videos in folders and subfolders, using the naming scheme `Uploader [CHANNELID]/Title - Uploader - 20191231/Title - Uploader - 20191231 [VIDEOID].ext`.
+```
+--output "%(uploader)s - [%(channel_id)s]/%(title)s - %(uploader)s - %(upload_date)s/%(title)s - %(uploader)s - %(upload_date)s [%(id)s].%(ext)s"
+```	
+
+- **channels** is 
+
+```
+Uploader [CHANNELID]/Title - Uploader - 20111306/Title - Uploader - 20111306 [VIDEOID].ext
+```
+
+```
+--output "%(uploader)s - [%(channel_id)s]/%(title)s - %(uploader)s - %(upload_date)s/%(title)s - %(uploader)s - %(upload_date)s [%(id)s].%(ext)s" 
+```
+	
+- **playlists** is
+
+```
+Uploader [CHANNELID]/PlaylistName - Uploader [PLAYLISTID]/Title - Uploader 20111306/Title - Uploader - 20111306 [VIDEOID].ext
+```
+	
+```
+--output "%(uploader)s - [%(channel_id)s]/%(playlist)s - %(uploader)s - [%(playlist_id)s]/%(title)s - %(uploader)s - %(upload_date)s/%(title)s - %(uploader)s - %(upload_date)s [%(id)s].%(ext)s"
+```
+
+
+## Setup on Android
+You will need termux, a terminal emulato r for android. [[Google Play](https://play.google.com/store/apps/details?id=com.termux), [F-Droid](https://f-droid.org/repository/browse/?fdid=com.termux)]
+
+Copy `/habeshaGhosty-dl/habeshaGhosty-android` and run `setup.sh`.
+<br>SHARE LINK TO TERMUX.
 
 
 # THINGS TO DO
-[ ] Remove links after it finishes from queue
-[ ] Package it (pip)
-[ ] Write metadata that can be used by PLEX
-
+- [ ] Remove links after it finishes from queue
+- [ ] Package it (pip)
+- [ ] Write metadata that can be used by PLEX
+- [ ] Date parameter
+- [ ] Add `playlist_no` and `video_id` in the filename
 - How does greg store podcast info, sync data. Where does it store it?
+
+
+
+---
+***I apologize for the bad commit messages and grammar.***
+
