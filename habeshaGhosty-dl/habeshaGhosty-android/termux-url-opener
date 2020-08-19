@@ -1,0 +1,30 @@
+#!/bin/bash
+#THINGS TO DO 
+# - check if input is correct
+
+URL=$1
+ 
+echo "
+# LOGO 
+"
+
+# Ask URL type
+echo "
+[v] video    [c] channel    [p] playlist"
+read -p ":> " mode
+
+# Download or queue
+echo "
+[d] dowload    [a] add to queue"
+read -p ":> " option
+
+case $option in 
+    d|D) 
+	ssh -i ~/.ssh/habeshaGhosty-dl user@host "nohup habeshaGhosty-dl download --download $mode $URL" ;;
+    a|A) 
+	ssh -i ~/.ssh/habeshaGhosty-dl user@host "nohup habeshaGhosty-dl add --mode $mode $URL" ;;
+   
+esac
+
+echo "DONE"
+sleep 5
