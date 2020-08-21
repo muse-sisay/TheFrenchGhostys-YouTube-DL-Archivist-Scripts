@@ -26,6 +26,12 @@ Required modules **click** and **youtube-dl**.
 }
 ```
 
+## Installation :
+Add to `~/.bashrc`, this is required for termux-open-url to work
+```bash
+alias habeshaGhosty-dl="python3 /path/to/script/habeshaGhosty-dl/main.py"
+```
+if `habeshaGhosty-dl` is to long, add another alias.
 
 ## Usage :
 ### To download videos
@@ -52,7 +58,14 @@ $ python3 main.py add --mode channel -f [FILE]
 ```
 
 
-## Customization
+If you have added to `~/.bashrc`, you can call the command as follows
+
+```bash 
+$ habeshaGhosty-dl download --mode [channel|playlsit|video] -l [LINK]
+$ habeshaGhosty-dl add --mode channel -f [FILE]
+```
+
+## Customization :
 ### Custom quality
 To use a custom quality, add your quality to config.json under `config -> quality` and change `default_quality`.
 eg.
@@ -104,8 +117,8 @@ Uploader [CHANNELID]/PlaylistName - Uploader [PLAYLISTID]/Title - Uploader 20111
 ## Setup on Android
 You will need termux, a terminal emulato r for android. [[Google Play](https://play.google.com/store/apps/details?id=com.termux), [F-Droid](https://f-droid.org/repository/browse/?fdid=com.termux)]
 
-Copy `/habeshaGhosty-dl/habeshaGhosty-android` and run `setup.sh`.
-<br>SHARE LINK TO TERMUX.
+Copy `/habeshaGhosty-dl/habeshaGhosty-android` and run `setup.sh`. It will prompt you for  username and host address. Then copy `termux-url-opener` to `~/bin`
+<br>Then share LINK from `YoutTube` TO `TERMUX`.
 
 
 # THINGS TO DO
