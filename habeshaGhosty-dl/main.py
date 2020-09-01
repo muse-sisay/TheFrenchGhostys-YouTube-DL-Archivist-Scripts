@@ -50,7 +50,7 @@ def download(mode, link):
     ydl_opts = {"format": f_ormat}
     ydl_opts.update(extra)
 
-    if mode == 'unique':
+    if mode == 'video':
         # If the video is part of a playlist download only the video
         ydl_opts['noplaylist'] = True
 
