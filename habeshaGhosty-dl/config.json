@@ -7,7 +7,7 @@
 		},
 		"output_format": {
 			"channel": "%(uploader)s - [%(channel_id)s]/%(title)s - %(uploader)s - %(upload_date)s/%(title)s - %(uploader)s - %(upload_date)s [%(id)s].%(ext)s",
-			"playlist": "%(uploader)s - [%(channel_id)s]/%(playlist)s - %(uploader)s - [%(playlist_id)s]/%(title)s - %(uploader)s - %(upload_date)s/%(title)s - %(uploader)s - %(upload_date)s [%(id)s].%(ext)s",
+			"playlist": "%(uploader)s - [%(channel_id)s]/%(playlist)s - %(uploader)s - [%(playlist_id)s]/%(playlist_index)s %(title)s - %(uploader)s - %(upload_date)s/%(title)s - %(uploader)s - %(upload_date)s [%(id)s].%(ext)s",
 			"video": "%(uploader)s - [%(channel_id)s]/%(title)s - %(uploader)s - %(upload_date)s/%(title)s - %(uploader)s - %(upload_date)s [%(id)s].%(ext)s"
 		},
 		"extra": {
