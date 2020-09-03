@@ -5,13 +5,14 @@
 URL=$1
 
 
-until [[ $option =~ ^[da][vcp] ]]
+until [[ $option =~ ^[dal][vcp] ]]
 do
 
 # Ask URL type
 echo "
 $(tput setaf 3)- OPERATION
-$(tput setaf 2)    [d] download    [a] add to queue
+$(tput setaf 2)    [d] download    [a] add to queue  [l] add to local queue
+
 $(tput setaf 3)- MODE
 $(tput setaf 2)    [v] video       [c] channel       [p] playlist
 $(tput sgr0) ++++++++++++++++++++++++++++++++++++++++++++++++++++ "
@@ -27,11 +28,31 @@ case $option in
 		mode=${option:1:1}
 		ssh -i ~/.ssh/habeshaGhosty-dl user@host "nohup habeshaGhosty-dl add --mode $mode $URL" 
 		echo "$(tput setaf 2)Added to queue successfully" ;;
-    
+   
+   lv|lc|lp|Lv|Lc|Lp)
+		mode=${option:1:1}
+
+		if [[ $mode == "v" ]]
+		then
+		    # Write to sourceVideo
+		    echo $URL >> ~/.habeshaGhosty-dl/sourceVideo
+
+		elif  [[ $mode == "c" ]]
+		then
+		    # Write to sourceChannel
+		    echo $URL >>  ~/.habeshaGhosty-dl/sourceChannel
+
+		elif [[ $mode == "p" ]]
+		then
+		    # Write to sourcePlaylist
+		    echo $URL >>  ~/.habeshaGhosty-dl/sourcePlaylist
+		fi ;;
+
     * ) 
 
 	echo "$(tput setaf 1)Unrecognized option \"$option\""
-	echo "Usage: mode operation + mode eg. [ dv | dc | dp | av | ac | ap ]" ;;
+	echo "Usage: operation + mode 
+	eg. [ dv | dc | dp | av | ac | ap | lv | lc | lp]" ;;
 esac
 
 done 
