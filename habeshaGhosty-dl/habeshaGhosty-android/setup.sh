@@ -8,6 +8,10 @@ read -p "Host :> " host_u
 
 # Setup RSA keys (is that what they are called,correct me if I am wrong)
 echo "Creating RSA keys : ~/.ssh/habeshaGhosty-dl"
+if [[ -f "~/.ssh/habeshaGhosty-dl" ]]
+then 
+    rm -f ~/.ssh/habeshaGhosty-dl
+fi
 ssh-keygen -f ~/.ssh/habeshaGhosty-dl -q -N ""
 
 # replace default usear and host by values provide by user
@@ -19,6 +23,12 @@ cp termux-url-opener ~/bin
 # Add them to host machine
 echo "Adding public key to $host_u, (you will be asked for password to copy)"
 ssh-copy-id -i ~/.ssh/habeshaGhosty-dl $user@$host_u
+
+# Create directory where queue-list are saved
+if [[ ! -d "~/.habeshaGhosty-dl" ]]
+then 
+    mkdir ~/.habeshaGhosty-dl
+fi
 
 echo
 echo "Setup Finished, echo"
