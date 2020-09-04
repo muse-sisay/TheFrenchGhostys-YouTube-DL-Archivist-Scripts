@@ -46,7 +46,7 @@ case $option in
 		then
 		    # Write to sourcePlaylist
 		    echo $URL >>  ~/.habeshaGhosty-dl/sourcePlaylist
-		fi ;;
+		fi 
 		
 		echo "$(tput setaf 2)Added to local queue successfully" ;;
     * ) 
