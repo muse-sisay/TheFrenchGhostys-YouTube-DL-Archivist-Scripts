@@ -47,7 +47,8 @@ case $option in
 		    # Write to sourcePlaylist
 		    echo $URL >>  ~/.habeshaGhosty-dl/sourcePlaylist
 		fi ;;
-
+		
+		echo "$(tput setaf 2)Added to local queue successfully" ;;
     * ) 
 
 	echo "$(tput setaf 1)Unrecognized option \"$option\""
@@ -57,4 +58,4 @@ esac
 
 done 
 
-sleep 5
+sleep 2
