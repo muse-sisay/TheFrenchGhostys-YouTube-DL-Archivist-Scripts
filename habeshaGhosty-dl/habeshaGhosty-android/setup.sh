@@ -15,10 +15,19 @@ fi
 ssh-keygen -f ~/.ssh/habeshaGhosty-dl -q -N ""
 
 # replace default usear and host by values provide by user
-sed -i "s/user/$user/g; s/host/$host_u/g" termux-url-pener
+sed -i "s/user/$user/g; s/host/$host_u/g" habeshaGh-android.sh
 
-echo "Coping termux-url-opener to ~/bin"
-cp termux-url-opener ~/bin
+echo "Coping habeshaGh-android.sh to ~/.habeshaGhosty-dl"
+cp habeshaGh-android.sh ~/.habeshaGhosty-dl/
+
+if [[  ! -f ~/bin/termux-url-opener ]]
+then 
+    rm ~/bin/termux-url-opener
+else 
+    touch ~/bin/termux-url-opener
+    echo "~/.habeshaGhosty-dl/habeshaGh-android.sh" > ~/bin/termux-url-opener
+    chmod +x termux-url-opener
+fi
 
 # Add them to host machine
 echo "Adding public key to $host_u, (you will be asked for password to copy)"
