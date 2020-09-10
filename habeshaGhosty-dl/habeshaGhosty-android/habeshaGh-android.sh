@@ -52,7 +52,7 @@ function add_to_queue_r (){
 	local mode=$1
 	local URL=$2
 
-	ssh -i $S_KEY ${USER}@$HOST habeshaGhosty-dl download add --mode $mode -l $URL
+	ssh -i $S_KEY ${USER}@$HOST habeshaGhosty-dl add --mode $mode -l $URL
 
 	if [ $? -eq 0 ] 
 	then 
@@ -127,7 +127,7 @@ function termux_url_opener (){
 		   lv|lc|lp|Lv|Lc|Lp)
 				mode=${option:1:1}
 
-				save_to_queue $mode
+				save_to_queue $mode $URL
 				
 				echo "$(tput setaf 2)Added to local queue successfully" ;;
 		  
