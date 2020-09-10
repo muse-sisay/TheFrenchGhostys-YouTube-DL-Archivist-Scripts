@@ -10,7 +10,7 @@ import OptionEatAll
 def common_options(f):
     options = [
         click.option(
-            '--mode', '-m', type=click.Choice(['video', 'channel', 'playlist'], case_sensitive=False, )),
+            '--mode', '-m', type=click.Choice(['video', 'channel', 'playlist', 'm', 'c', 'p'], case_sensitive=False, )),
         click.option('--link', '-l', type=str, help="YouTube link/s",
                      cls=OptionEatAll.OptionEatAll),
     ]
