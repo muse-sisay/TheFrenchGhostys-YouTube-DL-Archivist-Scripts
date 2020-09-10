@@ -3,13 +3,16 @@ import youtube_dl
 import click
 import json
 import functools
+from pathlib import Path
 import OptionEatAll
+
 
 def common_options(f):
     options = [
         click.option(
             '--mode', '-m', type=click.Choice(['video', 'channel', 'playlist'], case_sensitive=False, )),
-        click.option('--link', '-l', type=str, help="YouTube link/s",  cls=OptionEatAll.OptionEatAll),
+        click.option('--link', '-l', type=str, help="YouTube link/s",
+                     cls=OptionEatAll.OptionEatAll),
     ]
     return functools.reduce(lambda x, opt: opt(x), options, f)
 
@@ -40,7 +43,10 @@ def download(mode, link):
         print("Exiting")
         exit()
 
-    with open('config.json', 'r') as f:
+    script_path = Path(__file__).absolute()
+    config_path = script_path.parent / "config.json"
+
+    with open(config_path, 'r') as f:
         config = json.load(f)
 
     quality = config['default_quality']
@@ -59,7 +65,7 @@ def download(mode, link):
     ydl_opts['outtmpl'] = f"{config['output_path']}/" + outtmpl
 
     # File name of a file where all downloads are recorded.
-    ydl_opts['download_archive'] = config['archive_log'][mode]
+    ydl_opts['download_archive'] = f"{config['output_path']}/{config['archive_log'][mode]}"
 
     if not link:
         with open(config['queue_file'][mode], 'r') as f:
@@ -83,7 +89,9 @@ def add(mode, link, file):
         print("Exiting")
         exit()
 
-    with open('config.json', 'r') as f:
+    script_path = Path(__file__).absolute()
+    config_path = script_path.parent / "config.json"
+    with open(config_path, 'r') as f:
         config = json.load(f)
 
     if file:
