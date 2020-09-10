@@ -2,7 +2,7 @@
 
 S_KEY=~/.ssh/habeshaGhosty-dl
 USER=user
-HOST=host
+HOST=hostu
 
 function save_to_queue (){
 

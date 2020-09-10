@@ -7,7 +7,7 @@ read -p "Host :> " host_u
 
 
 # Setup RSA keys (is that what they are called,correct me if I am wrong)
-echo "Creating RSA keys : ~/.ssh/habeshaGhosty-dl"
+echo "$(tput setaf 3) Creating RSA keys : ~/.ssh/habeshaGhosty-dl $(tput sgr0)"
 if [[ -f ~/.ssh/habeshaGhosty-dl ]]
 then 
     rm -f ~/.ssh/habeshaGhosty-dl
@@ -15,9 +15,9 @@ fi
 ssh-keygen -f ~/.ssh/habeshaGhosty-dl -q -N ""
 
 # replace default usear and host by values provide by user
-sed -i "s/user/$user/g; s/host/$host_u/g" habeshaGh-android.sh
+sed -i "s/user/$user/g; s/hostu/$host_u/1 " habeshaGh-android.sh
 
-echo "Coping habeshaGh-android.sh to ~/.habeshaGhosty-dl"
+echo "$(tput setaf 3) Copying habeshaGh-android.sh to ~/.habeshaGhosty-dl $(tput sgr0)"
 cp habeshaGh-android.sh ~/.habeshaGhosty-dl/
 
 if [[  ! -f ~/bin/termux-url-opener ]]
@@ -30,7 +30,7 @@ else
 fi
 
 # Add them to host machine
-echo "Adding public key to $host_u, (you will be asked for password to copy)"
+echo "$(tput setaf 3) Adding public key to $host_u, (you will be asked for password to copy) $(tput sgr0)"
 ssh-copy-id -i ~/.ssh/habeshaGhosty-dl $user@$host_u
 
 # Create directory where queue-list are saved
@@ -40,4 +40,4 @@ then
 fi
 
 echo
-echo "Setup Finished, echo"
+echo "$(tput setaf 3)Setup Finished!!"
