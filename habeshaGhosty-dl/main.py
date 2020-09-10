@@ -3,13 +3,13 @@ import youtube_dl
 import click
 import json
 import functools
-
+import OptionEatAll
 
 def common_options(f):
     options = [
         click.option(
             '--mode', '-m', type=click.Choice(['video', 'channel', 'playlist'], case_sensitive=False, )),
-        click.option('--link', '-l', type=str, help="YouTube link/s"),
+        click.option('--link', '-l', type=str, help="YouTube link/s",  cls=OptionEatAll.OptionEatAll),
     ]
     return functools.reduce(lambda x, opt: opt(x), options, f)
 
@@ -64,8 +64,6 @@ def download(mode, link):
     if not link:
         with open(config['queue_file'][mode], 'r') as f:
             link = [x.strip() for x in f.readlines()]
-    else:
-        link = [link]
 
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download(link)
@@ -92,10 +90,10 @@ def add(mode, link, file):
         with open(file, 'r') as f:
             link = [l for l in f.readlines()]
     else:
-        link = [l for l in link.split()]
+        link = [l.split() for l in link]
 
     with open(config['queue_file'][mode], 'a') as fi:
-        [fi.write(l) for l in link]
+        [fi.write(f'{f} \n') for l in link]
 
 
 cli()
