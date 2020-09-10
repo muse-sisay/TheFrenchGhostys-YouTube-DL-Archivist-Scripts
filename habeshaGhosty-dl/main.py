@@ -100,7 +100,9 @@ def add(mode, link, file):
     else:
         link = [l.split() for l in link]
 
-    with open(config['queue_file'][mode], 'a') as fi:
+    script_path = Path(__file__).absolute()
+    queue_path = script_path.parent / config['queue_file'][mode]
+    with open(queue_path, 'a') as fi:
         [fi.write(f'{f} \n') for l in link]
 
 
