@@ -14,18 +14,16 @@ then
 fi
 ssh-keygen -f ~/.ssh/habeshaGhosty-dl -q -N ""
 
-# replace default usear and host by values provide by user
-sed -i "s/user/$user/g; s/hostu/$host_u/1 " habeshaGh-android.sh
-
 echo "$(tput setaf 3) Copying habeshaGh-android.sh to ~/.habeshaGhosty-dl $(tput sgr0)"
-cp habeshaGh-android.sh ~/.habeshaGhosty-dl/
+# replace default usear and host by values provide by user
+sed  "s/user/$user/g; s/hostu/$host_u/1 " habeshaGh-android.sh > ~/.habeshaGhosty-dl/habeshaGh-android.sh
 
 if [[  ! -f ~/bin/termux-url-opener ]]
 then 
     rm ~/bin/termux-url-opener
 else 
     touch ~/bin/termux-url-opener
-    echo "~/.habeshaGhosty-dl/habeshaGh-android.sh" > ~/bin/termux-url-opener
+    echo "~/.habeshaGhosty-dl/habeshaGh-android.sh -t \$1" > ~/bin/termux-url-opener
     chmod +x termux-url-opener
 fi
 
