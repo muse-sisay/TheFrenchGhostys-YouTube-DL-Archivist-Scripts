@@ -10,7 +10,7 @@ import OptionEatAll
 def common_options(f):
     options = [
         click.option(
-            '--mode', '-m', type=click.Choice(['video', 'channel', 'playlist', 'm', 'c', 'p'], case_sensitive=False, )),
+            '--mode', '-m', type=click.Choice(['video', 'channel', 'playlist'], case_sensitive=False, )),
         click.option('--link', '-l', type=str, help="YouTube link/s",
                      cls=OptionEatAll.OptionEatAll),
     ]
@@ -98,12 +98,13 @@ def add(mode, link, file):
         with open(file, 'r') as f:
             link = [l for l in f.readlines()]
     else:
-        link = [l.split() for l in link]
+        link = [l.split()[0] for l in link]
 
-    script_path = Path(__file__).absolute()
     queue_path = script_path.parent / config['queue_file'][mode]
+
     with open(queue_path, 'a') as fi:
-        [fi.write(f'{f} \n') for l in link]
+        for l in link :
+            fi.write(f'{l}\n')
 
 
 cli()

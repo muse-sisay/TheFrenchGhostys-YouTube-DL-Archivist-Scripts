@@ -4,6 +4,14 @@ S_KEY=~/.ssh/habeshaGhosty-dl
 USER=user
 HOST=hostu
 
+menu_opt="
+$(tput setaf 3)- OPERATION
+$(tput setaf 2)    [d] download    [a] add to queue  [l] add to local queue
+
+$(tput setaf 3)- MODE
+$(tput setaf 2)    [v] video       [c] channel       [p] playlist
+$(tput sgr0) ++++++++++++++++++++++++++++++++++++++++++++++++++++ "
+
 function save_to_queue (){
 
 	mode=$1
@@ -26,7 +34,7 @@ function save_to_queue (){
 	fi 
 }
 
-function empty_to_queue (){
+function empty_queue (){
 
 	mode=$1
 
@@ -52,15 +60,21 @@ function add_to_queue_r (){
 	local mode=$1
 	local URL=$2
 
+	if [[ $mode == "v" ]]
+	then
+	   mode=video
+
+	elif  [[ $mode == "c" ]]
+	then
+	   mode=channel
+
+	elif [[ $mode == "p" ]]
+	then
+	   mode=playlist
+	fi
+
 	ssh -i $S_KEY ${USER}@$HOST habeshaGhosty-dl add --mode $mode -l $URL
 
-	if [ $? -eq 0 ] 
-	then 
-		echo "Sent sucessfully"
-		# Remove the contents
-		empty_to_queue $mode
-	fi 
-	sleep 1
 }	
 
 function read_queue (){
@@ -89,7 +103,6 @@ function read_queue (){
 
 	done < $q_file
 
-	echo $list
 }
 
 function termux_url_opener (){
@@ -99,14 +112,18 @@ function termux_url_opener (){
     until [[ $option =~ ^[dal][vcp] ]]
 	do
 
-		# ask operation type
-		echo "
-		$(tput setaf 3)- OPERATION
-		$(tput setaf 2)    [d] download    [a] add to queue  [l] add to local queue
+# ask operation type
 
-		$(tput setaf 3)- MODE
-		$(tput setaf 2)    [v] video       [c] channel       [p] playlist
-		$(tput sgr0) ++++++++++++++++++++++++++++++++++++++++++++++++++++ "
+cat << EOF
+$(tput setaf 3)- OPERATION
+$(tput setaf 2)    [d] download    [a] add to queue  [l] add to local queue
+
+$(tput setaf 3)- MODE
+$(tput setaf 2)    [v] video       [c] channel       [p] playlist
+$(tput sgr0) ++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+EOF
+		
 		read -p ":> " option
 
 		case $option in 
@@ -169,7 +186,15 @@ then
 		list=$(read_queue $mode)
 
 		echo "The LIST IS $list"
-		add_to_queue_r $mode "$list"
+		add_to_queue_r $mode $list
+
+		if [ $? -eq 0 ] 
+		then 
+			echo "Sent sucessfully"
+			# Remove the contents
+			empty_queue $mode
+		fi 
+		sleep 1
 
 	else 
 		echo "Unrecognized mode: $mode"
