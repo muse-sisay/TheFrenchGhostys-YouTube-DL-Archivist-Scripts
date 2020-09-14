@@ -1,32 +1,15 @@
-##	 termux-url-opener
+##	 HabeshaGhosty-Android
  
- - First ask link type
- - Ask if it should be downloaded right now 
- <br>or simply added to queue.
-
- - Establish ssh connection 
- <br/>use identity file.
+<image src="../readme/habeshaGhosty_android.jpg" height="400">  
  
- **On the machine with habeshaghosty installed**
-- Add to queue 
-- get file path from ENV ( the script should export file path fromconfig.json )
-<br>  [OR]
-<br>call habeshaGhosty-dl add subcommand
-- Start a TMUX session
-- run the program 
-- Exit TMUX
-<br>: another option is to start the program in backgroun with "nohup"
-<br>this would be the best solution, because it doesnot require additional requirments
-   
- 
-## setup script
+## Setup Script
+This script is used to set up habeshaGhosty-android. It will prompt you for username and the host address of the remote machine( i.e computer/server where habeshaGhosty is installed). It will then generate RSA keys in   **~/.ssh/habeshaGhosty-dl.pub** and **~/.ssh/habeshaGhosty-dl**, which will enable the script to run without requiring authentication. Then it will move `habeshaGh-android.sh` to `~/.habsehaGhosty-dl`.
 
- - Generate RSA keys for ssh 
-<br>place them in   ~/.ssh/habeshaGhosty-dl.pub and
-<br>					~/.ssh/habeshaGhosty-dl
-<br>add them to host machine, user is required to authenticate
+## Usage
+Its as simple as choosing Termx on the share sheet.
 
-- download `termux-url-opener`
-<br>if "habeshaGhosty-android" is downloaded, no need to download 
-<br>just move `termux-url-opener` to ~/bin (best option)
+```bash
+$ cd ~/.habeshaGhosty-dl
+$ ./habeshaGh-android.sh -sm v # send video queue 
+```
 
