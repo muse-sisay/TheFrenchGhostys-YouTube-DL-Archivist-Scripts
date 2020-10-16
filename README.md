@@ -117,7 +117,7 @@ Uploader [CHANNELID]/PlaylistName - Uploader [PLAYLISTID]/Title - Uploader 20111
 ## Setup on Android
 You will need termux, a terminal emulato r for android. [[Google Play](https://play.google.com/store/apps/details?id=com.termux), [F-Droid](https://f-droid.org/repository/browse/?fdid=com.termux)]
 
-Copy `/habeshaGhosty-dl/habeshaGhosty-android` and run `setup.sh`. It will prompt you for  username and host address. Then copy `termux-url-opener` to `~/bin`
+Copy `/habeshaGhosty-dl/habeshaGhosty-android` and run `setup.sh`. It will prompt you for  username and host address.  
 <br>Then share LINK from `YoutTube` TO `TERMUX`.
 
 
@@ -125,8 +125,7 @@ Copy `/habeshaGhosty-dl/habeshaGhosty-android` and run `setup.sh`. It will promp
 - [ ] Remove links after it finishes from queue
 - [ ] Package it (pip)
 - [ ] Write metadata that can be used by PLEX
-- [ ] Date parameter
-- [ ] Add `playlist_no` and `video_id` in the filename
+- [ ] Date parameter (when archiving Channels)
 - How does greg store podcast info, sync data. Where does it store it?
 
 
