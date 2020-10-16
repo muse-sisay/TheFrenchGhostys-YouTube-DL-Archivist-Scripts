@@ -32,7 +32,8 @@ def cli(**kwargs):
 
 @cli.command(short_help='Download vidoes.')
 @common_options
-def download(mode, link):
+@click.option('--archiveLog', '-a', 'archiveLog', type=click.Path(), help="specify archive log files")
+def download(mode, link, archiveLog):
     '''
     Download videos
 
@@ -65,7 +66,10 @@ def download(mode, link):
     ydl_opts['outtmpl'] = f"{config['output_path']}/" + outtmpl
 
     # File name of a file where all downloads are recorded.
-    ydl_opts['download_archive'] = f"{config['output_path']}/{config['archive_log'][mode]}"
+    if archiveLog:
+        ydl_opts['download_archive'] = Path(archiveLog).absolute()
+    else:
+        ydl_opts['download_archive'] = f"{config['output_path']}/{config['archive_log'][mode]}"
 
     if not link:
         with open(config['queue_file'][mode], 'r') as f:
@@ -103,7 +107,7 @@ def add(mode, link, file):
     queue_path = script_path.parent / config['queue_file'][mode]
 
     with open(queue_path, 'a') as fi:
-        for l in link :
+        for l in link:
             fi.write(f'{l}\n')
 
 
